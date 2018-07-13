@@ -11,4 +11,4 @@ const node = new Triply({data:1})
     .previous() // try to move the insertion point back along the traversal path (the branch containing `data:2`)
     .open({data:5}) // append another child
     .push({data:6}); // append another sibling to that child
-for(let x of node.traverse()) console.log("x",x.$0 == 3 ? "closes: " + x.$3.data : x.data)
+for(let x of node.traverse()) console.log("x",Triply.isClose(x) ? "closes: " + Triply.link(x).data : x.data)
