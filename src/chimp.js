@@ -137,7 +137,7 @@ export function lastChild(node) {
 }
 
 /**
- * Expand LEAF into BRANCH (private)
+ * Expand LEAF into BRANCH
  * @private
  * @param  {Object}   node      Node-formatted object
  * @return {Object}             Node-formatted object
@@ -156,7 +156,7 @@ function _promote(node) {
 }
 
 /**
- * Collapse BRANCH into LEAF (private)
+ * Collapse BRANCH into LEAF
  * @private
  * @param  {Object}   node      Node-formatted object
  * @return {Object}             Node-formatted object
@@ -172,7 +172,7 @@ function _demote(node) {
 }
 
 /**
- * append child to node (promotes LEAF to BRANCH is needed)
+ * append child to node (promotes LEAF to BRANCH if needed)
  * @param  {Object} node Node-formatted object
  * @param  {Object} ref  Node-formatted object
  * @return {Object}      The appended child

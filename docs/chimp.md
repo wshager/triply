@@ -88,7 +88,7 @@
 <dd><p>Get the node&#39;s lastChild</p>
 </dd>
 <dt><a href="#appendChild">appendChild(node, ref)</a> ⇒ <code>Object</code></dt>
-<dd><p>append child to node (promotes LEAF to BRANCH is needed)</p>
+<dd><p>append child to node (promotes LEAF to BRANCH if needed)</p>
 </dd>
 <dt><a href="#insertBefore">insertBefore(node, ref)</a> ⇒ <code>Object</code></dt>
 <dd><p>insert node before ref (sibling)</p>
@@ -302,7 +302,7 @@ Get the node's lastChild
 <a name="appendChild"></a>
 
 ## appendChild(node, ref) ⇒ <code>Object</code>
-append child to node (promotes LEAF to BRANCH is needed)
+append child to node (promotes LEAF to BRANCH if needed)
 
 **Kind**: global function  
 **Returns**: <code>Object</code> - The appended child  
