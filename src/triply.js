@@ -71,7 +71,7 @@ class Triply {
         return this.appendChild(props);
     }
     /**
-     *  move insert down one level (if possible)
+     *  move insertion point down one level (if possible)
      * @return {Triply} The updated object
      */
     close() {
@@ -80,7 +80,7 @@ class Triply {
         return this;
     }
     /**
-     *  move insert back
+     *  move insertion point back
      * @return {Triply} The updated object
      */
     previous() {
@@ -89,7 +89,7 @@ class Triply {
         return this;
     }
     /**
-     *  move insert forward
+     *  move insertion point forward
      * @return {Triply} The updated object
      */
     next() {

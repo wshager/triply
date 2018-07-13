@@ -101,21 +101,21 @@ insert new child in current insertion point
 <a name="Triply+close"></a>
 
 ### triply.close() ⇒ [<code>Triply</code>](#Triply)
-move insert down one level (if possible)
+move insertion point down one level (if possible)
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: [<code>Triply</code>](#Triply) - The updated object  
 <a name="Triply+previous"></a>
 
 ### triply.previous() ⇒ [<code>Triply</code>](#Triply)
-move insert back
+move insertion point back
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: [<code>Triply</code>](#Triply) - The updated object  
 <a name="Triply+next"></a>
 
 ### triply.next() ⇒ [<code>Triply</code>](#Triply)
-move insert forward
+move insertion point forward
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: [<code>Triply</code>](#Triply) - The updated object  

@@ -43,7 +43,7 @@ for(let x of node.traverse()) console.log("x",Triply.isClose(x) ? "closes: " + T
 
 ## About
 
-Triply is a way to create in-memory trees with some very peculiar performance characteristics:
+Triply is a way to create in-memory trees with some very interesting performance characteristics:
 
 * Fast traversal in 2 directions
 * Fast appendChild, insertBefore, insertAfter, removeChild

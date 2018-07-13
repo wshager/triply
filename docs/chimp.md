@@ -1,6 +1,24 @@
 ## Constants
 
 <dl>
+<dt><a href="#LEAF">LEAF</a> : <code>Number</code></dt>
+<dd><p>Type LEAF = 1</p>
+</dd>
+<dt><a href="#BRANCH">BRANCH</a> : <code>Number</code></dt>
+<dd><p>Type BRANCH = 2</p>
+</dd>
+<dt><a href="#CLOSE">CLOSE</a> : <code>Number</code></dt>
+<dd><p>Type CLOSE = 3</p>
+</dd>
+<dt><a href="#isLeaf">isLeaf</a> ⇒ <code>Boolean</code></dt>
+<dd><p>Test if node is LEAF</p>
+</dd>
+<dt><a href="#isBranch">isBranch</a> ⇒ <code>Boolean</code></dt>
+<dd><p>Test if node is BRANCH</p>
+</dd>
+<dt><a href="#isClose">isClose</a> ⇒ <code>Boolean</code></dt>
+<dd><p>Test if node is CLOSE</p>
+</dd>
 <dt><a href="#isLastChild">isLastChild</a> ⇒ <code>Boolean</code></dt>
 <dd><p>Test if node is last child</p>
 </dd>
@@ -19,8 +37,14 @@
 
 <dl>
 <dt><a href="#create">create([props], [type])</a> ⇒ <code>Object</code></dt>
-<dd><p>Create node: branch or leaf
-Actually, a LEAF never has $3...</p>
+<dd><p>Create a leaf node (branches and closes are created by the implementation)
+The following keys are reserved for formatting an object as a node:
+| Key             | Purpose
+| :--------------- | :----------
+| $0   | Type
+| $1   | Depth-first travsersal
+| $2   | Reversed depth-first Traversal
+| $3   | BRANCH-to-CLOSE link</p>
 </dd>
 <dt><a href="#next">next(node)</a> ⇒ <code>Object</code> | <code>void</code></dt>
 <dd><p>Get the node&#39;s next node in depth-first traversal</p>
@@ -65,6 +89,57 @@ Actually, a LEAF never has $3...</p>
 <dd><p>remove node from its parent</p>
 </dd>
 </dl>
+
+<a name="LEAF"></a>
+
+## LEAF : <code>Number</code>
+Type LEAF = 1
+
+**Kind**: global constant  
+<a name="BRANCH"></a>
+
+## BRANCH : <code>Number</code>
+Type BRANCH = 2
+
+**Kind**: global constant  
+<a name="CLOSE"></a>
+
+## CLOSE : <code>Number</code>
+Type CLOSE = 3
+
+**Kind**: global constant  
+<a name="isLeaf"></a>
+
+## isLeaf ⇒ <code>Boolean</code>
+Test if node is LEAF
+
+**Kind**: global constant  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| node | <code>Object</code> | Node-formatted object |
+
+<a name="isBranch"></a>
+
+## isBranch ⇒ <code>Boolean</code>
+Test if node is BRANCH
+
+**Kind**: global constant  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| node | <code>Object</code> | Node-formatted object |
+
+<a name="isClose"></a>
+
+## isClose ⇒ <code>Boolean</code>
+Test if node is CLOSE
+
+**Kind**: global constant  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| node | <code>Object</code> | Node-formatted object |
 
 <a name="isLastChild"></a>
 
@@ -117,7 +192,7 @@ Retrieve the branch's closer, or the closer's branch
 <a name="create"></a>
 
 ## create([props], [type]) ⇒ <code>Object</code>
-Create node: branch or leafActually, a LEAF never has $3...
+Create a leaf node (branches and closes are created by the implementation)The following keys are reserved for formatting an object as a node:| Key             | Purpose| :--------------- | :----------| $0   | Type| $1   | Depth-first travsersal| $2   | Reversed depth-first Traversal| $3   | BRANCH-to-CLOSE link
 
 **Kind**: global function  
 **Returns**: <code>Object</code> - node-formatted object  

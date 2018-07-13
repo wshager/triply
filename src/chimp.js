@@ -1,19 +1,57 @@
+/**
+ * Type LEAF = 1
+ * @type {Number}
+ */
 export const LEAF = 1;
+
+/**
+ * Type BRANCH = 2
+ * @type {Number}
+ */
 export const BRANCH = 2;
+
+/**
+ * Type CLOSE = 3
+ * @type {Number}
+ */
 export const CLOSE = 3;
 
+/**
+ * Test if node is LEAF
+ * @param  {Object}  node Node-formatted object
+ * @return {Boolean}
+ */
 export const isLeaf = node => node.$0 === LEAF;
+
+/**
+ * Test if node is BRANCH
+ * @param  {Object}  node Node-formatted object
+ * @return {Boolean}
+ */
 export const isBranch = node => node.$0 === BRANCH;
+
+/**
+ * Test if node is CLOSE
+ * @param  {Object}  node Node-formatted object
+ * @return {Boolean}
+ */
 export const isClose = node => node.$0 === CLOSE;
 
 /**
- * Create node: branch or leaf
- * Actually, a LEAF never has $3...
+ * Create a leaf node (branches and closes are created by the implementation)
+ * The following keys are reserved for formatting an object as a node:
+ * | Key             | Purpose
+ * | :--------------- | :----------
+ * | $0   | Type
+ * | $1   | Depth-first travsersal
+ * | $2   | Reversed depth-first Traversal
+ * | $3   | BRANCH-to-CLOSE link      
  * @param  {Object} [props={}]  initial object
  * @param  {Number} [type=LEAF] node type
  * @return {Object}             node-formatted object
  */
 export function create(props = {},type = LEAF) {
+    // NOTE Actually, a LEAF never has $3...
     return Object.assign({
         $0:type,
         $1:void 0,
