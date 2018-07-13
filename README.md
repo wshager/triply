@@ -2,9 +2,11 @@
 
 Yet another strange structure for creating trees...
 
+
 ## Install
 
 `npm i triply`
+
 
 ## Usage
 
@@ -28,6 +30,12 @@ const node = new Triply({data:1})
 for(let x of node.traverse()) console.log("x",x.$0 == 3 ? "closes: " + x.$3.data : x.data);
 ```
 
+
+## License
+
+[License](./license.md)
+
+
 ## About
 
 Triply is a way to create in-memory trees with some very peculiar performance characteristics:
@@ -40,6 +48,7 @@ Triply is a way to create in-memory trees with some very peculiar performance ch
 Updates require writes to at most 4 pointers (5 when expanding or collapsing branches).
 
 Use Triply to create trees that can be modified with some ease.
+
 
 ### Triply Pointer Rules
 
@@ -82,6 +91,7 @@ Append a child at tier 0 (or a sibling at tier 1):
   1 // 2                                      1 \\ 2
    B 3--->                                 <---3 /B 1 --> <-- 2 B ~
 ```
+
 
 ### Access logic
 
