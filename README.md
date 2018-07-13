@@ -38,8 +38,8 @@ for(let x of node.traverse()) console.log("x",Triply.isClose(x) ? "closes: " + T
 
 ## API documentation
 
-TODO
-
+* [Triply Class](./docs/triply.md)
+* [Functional implementation](./docs/chimp.md)
 
 ## About
 

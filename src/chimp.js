@@ -23,44 +23,83 @@ export function create(props = {},type = LEAF) {
 }
 
 /**
- * Get the node's next
- * @param  {[type]}   node [description]
- * @return {Function}      [description]
+ * Get the node's next node in depth-first traversal
+ * @param  {Object}   node      Node-formatted object
+ * @return {Object|void}        Node (if have)
  */
 export function next(node) {
     return node.$1;
 }
 
+/**
+ * Get the node's previous node in depth-first traversal
+ * @param  {Object}   node      Node-formatted object
+ * @return {Object|void}        Node (if have)
+ */
 export function previous(node) {
     return node.$2;
 }
 
+/**
+ * Get the node's nextSibling
+ * @param  {Object}   node      Node-formatted object
+ * @return {Object|void}        Node (if have)
+ */
 export function nextSibling(node) {
     if(isLastChild(node)) return;
     return node.$0 === LEAF ? node.$1 : node.$3.$1;
 }
 
+/**
+ * Get the node's previousSibling
+ * @param  {Object}   node      Node-formatted object
+ * @return {Object|void}        Node (if have)
+ */
 export function previousSibling(node) {
     if(isFirstChild(node)) return;
     const prev = node.$2;
     return prev.$0 === CLOSE ? prev.$3 : prev;
 }
 
+/**
+ * Traverse node
+ * @param  {Object}    node  Node-formatted object
+ * @yields {Object}          Node-formatted object
+ */
 export function* traverse(node) {
+    if(isLeaf(node)) return yield node;
+    const start = node;
     while(node) {
         yield node;
+        if(node === start.$3) return;
         node = node.$1;
     }
 }
 
+
+/**
+ * Get the node's firstChild
+ * @param  {Object}   node      Node-formatted object
+ * @return {Object|void}        Node (if have)
+ */
 export function firstChild(node) {
     if(node.$0 === BRANCH) return node.$1;
 }
 
+/**
+ * Get the node's lastChild
+ * @param  {Object}   node      Node-formatted object
+ * @return {Object|void}        Node (if have)
+ */
 export function lastChild(node) {
     if(node.$0 === BRANCH) return node.$3.$2;
 }
 
+/**
+ * Expand LEAF into BRANCH (private)
+ * @param  {Object}   node      Node-formatted object
+ * @return {Object}             Node-formatted object
+ */
 function _promote(node) {
     node.$0 = BRANCH;
     // add closer
@@ -74,6 +113,11 @@ function _promote(node) {
     return node;
 }
 
+/**
+ * Collapse BRANCH into LEAF (private)
+ * @param  {Object}   node      Node-formatted object
+ * @return {Object}             Node-formatted object
+ */
 function _demote(node) {
     node.$0 = LEAF;
     // re-attach sibling from closer
@@ -84,7 +128,12 @@ function _demote(node) {
     return node;
 }
 
-// - when child inserted, upgrade to BRANCH
+/**
+ * append child to node (promotes LEAF to BRANCH is needed)
+ * @param  {Object} node Node-formatted object
+ * @param  {Object} ref  Node-formatted object
+ * @return {Object}      The appended child
+ */
 export function appendChild(node,child) {
     if(node.$0 == LEAF) {
         // NOTE no last child
@@ -105,9 +154,9 @@ export function appendChild(node,child) {
 
 /**
  * insert node before ref (sibling)
- * @param  {node} node [description]
- * @param  {node} ref  [description]
- * @return {node}      [description]
+ * @param  {Object} node Node-formatted object
+ * @param  {Object} ref  Node-formatted object
+ * @return {Object}      The inserted node
  */
 export function insertBefore(node,ref) {
     if(isFirstChild(ref)) {
@@ -127,6 +176,12 @@ export function insertBefore(node,ref) {
     return node;
 }
 
+/**
+ * insert node after ref (sibling)
+ * @param  {Object} node Node-formatted object
+ * @param  {Object} ref  Node-formatted object
+ * @return {Object}      The inserted node
+ */
 export function insertAfter(node,ref) {
     const refIsBranch = ref.$0 === BRANCH;
     // get parent's closer
@@ -156,15 +211,42 @@ export function insertAfter(node,ref) {
     return node;
 }
 
+/**
+ * Test if node is last child
+ * @param  {Object} node Node-formatted object
+ * @return {Boolean}      The inserted node
+ */
 export const isLastChild = node => node.$1.$0 === CLOSE;
 
+/**
+ * Test if node is first child
+ * @param  {Object} node Node-formatted object
+ * @return {Boolean}      The inserted node
+ */
 export const isFirstChild = node => node.$2.$0 === BRANCH;
 
-export const isEmptyBranch = node => node.$1 === node.$3;
+/**
+ * Test if node is empty branch
+ * @param  {Object} node Node-formatted object
+ * @return {Boolean}      The inserted node
+ */
+export const isEmptyBranch = node => isBranch(node) && node.$1 === node.$3;
 
+/**
+ * Retrieve the branch's closer, or the closer's branch
+ * @param  {Object} node Node-formatted object
+ * @return {Object|void}      Node-formatted object (if any)
+ */
 export const link = node => node.$3;
 
+/**
+ * remove child from node
+ * @param  {Object} node Node-formatted object
+ * @param  {Object} ref  Node-formatted object
+ * @return {Object}      The provided branch node
+ */
 export function removeChild(node,child) {
+    // TODO guards!
     if(isLastChild(child)) {
         // last child
         const prev = child.$2;
@@ -185,18 +267,24 @@ export function removeChild(node,child) {
     return isEmptyBranch(node) ? _demote(node) : node;
 }
 
+/**
+ * remove node from its parent
+ * @param  {Object} node Node-formatted object
+ * @return {Object}      The previous node in traversal (not closers)
+ */
 export function remove(node) {
-    let parent
+    // TODO guards!
+    let parent;
+    const prev = previous(node);
     if(isFirstChild(node)) {
-        parent = node.$2;
+        removeChild(node.$2,node);
     } else if(isLastChild(node)) {
-        parent = node.$1.$3;
+        removeChild(node.$1.$3,node);
     } else {
         // splice out
-        const prev = node.$2;
         prev.$1 = node;
         node.$2 = prev;
         return prev;
     }
-    return lastChild(removeChild(parent,node));
+    return isClose(prev) ? link(prev) : prev;
 }
