@@ -1,6 +1,6 @@
 # Triply, a triply-linked list lib
 
-Yet another strange structure for creating trees...
+Yet another data structure for creating trees.
 
 
 ## Install
@@ -27,13 +27,18 @@ const node = new Triply({data:1})
 
 // traverse the tree (lazy iterator)
 // we have to keep track of branch 'closers' (compare for example with XML closing tags)
-for(let x of node.traverse()) console.log("x",x.$0 == 3 ? "closes: " + x.$3.data : x.data);
+for(let x of node.traverse()) console.log("x",Triply.isClose(x) ? "closes: " + Triply.link(x).data : x.data);
 ```
 
 
 ## License
 
 [License](./LICENSE)
+
+
+## API documentation
+
+TODO
 
 
 ## About
@@ -52,9 +57,9 @@ Use Triply to create trees that can be modified with some ease.
 
 ### Triply Pointer Rules
 
-1 = depth-first traversal
-2 = reversed traversal
-3 = open/close link
+* 1 = depth-first traversal
+* 2 = reversed traversal
+* 3 = open/close link
 
 Traversal directions (invert directions and arrows for reversed traversal):
 * UP = BRANCH -> LEAF or BRANCH
