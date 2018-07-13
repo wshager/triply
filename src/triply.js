@@ -1,7 +1,7 @@
 import * as chimp from "./chimp";
 
 /**
- * Tree interface for convient method chaining
+ * Tree interface for convenient method chaining
  */
 class Triply {
     /**

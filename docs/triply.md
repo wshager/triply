@@ -1,7 +1,7 @@
 <a name="Triply"></a>
 
 ## Triply
-Tree interface for convient method chaining
+Tree interface for convenient method chaining
 
 **Kind**: global class  
 
