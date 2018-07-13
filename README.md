@@ -33,7 +33,7 @@ for(let x of node.traverse()) console.log("x",x.$0 == 3 ? "closes: " + x.$3.data
 
 ## License
 
-[License](./license.md)
+[License](./LICENSE)
 
 
 ## About
