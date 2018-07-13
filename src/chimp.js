@@ -128,12 +128,14 @@ export function insertAfter(node,ref) {
     // get parent's closer
     const next = refIsBranch ? ref.$3.$1 : ref.$1;
     // point parent's closer to node
-    next.$2 = node;
-    // point node's next to next
-    if(node.$0 === BRANCH) {
-        node.$3.$1 = next;
-    } else {
-        node.$1 = next;
+    if(next) {
+        next.$2 = node;
+        // point node's next to next
+        if(node.$0 === BRANCH) {
+            node.$3.$1 = next;
+        } else {
+            node.$1 = next;
+        }
     }
 
     if(refIsBranch) {
