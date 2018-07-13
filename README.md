@@ -55,28 +55,33 @@ Traversal directions (invert directions and arrows for reversed traversal):
 
 ### Tree Diagrams
 
+```
            L
      1 // 2 1 \\ 2
       B 3-><-3 /B
   1 // 2      1 \\ 2
    B 3---> <---3 /B 1 --> <-- 2 B ~
+```
 
 Append a child at tier 1 (or a sibling at tier 2):
 
+```
          L 1 --> <-- 2 L
      1 // 2          1 \\ 2
       B 3--->     <---3 /B
   1 // 2               1 \\ 2
    B 3--->          <---3 /B 1 --> <-- 2 B ~
+```
 
 Append a child at tier 0 (or a sibling at tier 1):
 
+```
          L 1 --> <-- 2 L                   L
      1 // 2          1 \\ 2          1 // 2 1 \\ 2
       B 3--->     <---3 /B 1--> <-- 2 B 3-><-3 /B
   1 // 2                                      1 \\ 2
    B 3--->                                 <---3 /B 1 --> <-- 2 B ~
-
+```
 
 ### Access logic
 
