@@ -1,6 +1,6 @@
 {
   "name": "triply",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Triply-linked list",
   "main": "lib/triply.js",
   "scripts": {
@@ -14,7 +14,13 @@
     "@babel/core": "^7.0.0-beta.53",
     "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.53"
   },
-  "keywords": ["tree","linked","list","array","JSON"],
+  "keywords": [
+    "tree",
+    "linked",
+    "list",
+    "array",
+    "JSON"
+  ],
   "dependencies": {},
   "repository": {
     "type": "git",
