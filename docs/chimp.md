@@ -87,12 +87,6 @@
 <dt><a href="#lastChild">lastChild(node)</a> ⇒ <code>Object</code> | <code>void</code></dt>
 <dd><p>Get the node&#39;s lastChild</p>
 </dd>
-<dt><a href="#_promote">_promote(node)</a> ⇒ <code>Object</code></dt>
-<dd><p>Expand LEAF into BRANCH (private)</p>
-</dd>
-<dt><a href="#_demote">_demote(node)</a> ⇒ <code>Object</code></dt>
-<dd><p>Collapse BRANCH into LEAF (private)</p>
-</dd>
 <dt><a href="#appendChild">appendChild(node, ref)</a> ⇒ <code>Object</code></dt>
 <dd><p>append child to node (promotes LEAF to BRANCH is needed)</p>
 </dd>
@@ -300,30 +294,6 @@ Get the node's lastChild
 
 **Kind**: global function  
 **Returns**: <code>Object</code> \| <code>void</code> - Node (if have)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| node | <code>Object</code> | Node-formatted object |
-
-<a name="_promote"></a>
-
-## _promote(node) ⇒ <code>Object</code>
-Expand LEAF into BRANCH (private)
-
-**Kind**: global function  
-**Returns**: <code>Object</code> - Node-formatted object  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| node | <code>Object</code> | Node-formatted object |
-
-<a name="_demote"></a>
-
-## _demote(node) ⇒ <code>Object</code>
-Collapse BRANCH into LEAF (private)
-
-**Kind**: global function  
-**Returns**: <code>Object</code> - Node-formatted object  
 
 | Param | Type | Description |
 | --- | --- | --- |

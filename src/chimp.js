@@ -39,7 +39,7 @@ export const isClose = node => node.$0 === CLOSE;
 
 /**
  * Create a leaf node (branches and closes are created by the implementation).
- * 
+ *
  * The following keys are reserved for formatting an object as a node:
  *
  * | Key  | Purpose                        |
@@ -138,6 +138,7 @@ export function lastChild(node) {
 
 /**
  * Expand LEAF into BRANCH (private)
+ * @private
  * @param  {Object}   node      Node-formatted object
  * @return {Object}             Node-formatted object
  */
@@ -156,6 +157,7 @@ function _promote(node) {
 
 /**
  * Collapse BRANCH into LEAF (private)
+ * @private
  * @param  {Object}   node      Node-formatted object
  * @return {Object}             Node-formatted object
  */
