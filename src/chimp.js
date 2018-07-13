@@ -2,6 +2,10 @@ export const LEAF = 1;
 export const BRANCH = 2;
 export const CLOSE = 3;
 
+export const isLeaf = node => node.$0 === LEAF;
+export const isBranch = node => node.$0 === BRANCH;
+export const isClose = node => node.$0 === CLOSE;
+
 /**
  * Create node: branch or leaf
  * Actually, a LEAF never has $3...
@@ -156,7 +160,9 @@ export const isLastChild = node => node.$1.$0 === CLOSE;
 
 export const isFirstChild = node => node.$2.$0 === BRANCH;
 
-const isEmptyBranch = node => node.$1 === node.$3;
+export const isEmptyBranch = node => node.$1 === node.$3;
+
+export const link = node => node.$3;
 
 export function removeChild(node,child) {
     if(isLastChild(child)) {
