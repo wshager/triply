@@ -38,7 +38,8 @@ export const isBranch = node => node.$0 === BRANCH;
 export const isClose = node => node.$0 === CLOSE;
 
 /**
- * Create a leaf node (branches and closes are created by the implementation)
+ * Create a leaf node (branches and closes are created by the implementation).
+ * 
  * The following keys are reserved for formatting an object as a node:
  *
  * | Key  | Purpose                        |

@@ -37,8 +37,8 @@
 
 <dl>
 <dt><a href="#create">create([props], [type])</a> ⇒ <code>Object</code></dt>
-<dd><p>Create a leaf node (branches and closes are created by the implementation)
-The following keys are reserved for formatting an object as a node:</p>
+<dd><p>Create a leaf node (branches and closes are created by the implementation).</p>
+<p>The following keys are reserved for formatting an object as a node:</p>
 <table>
 <thead>
 <tr>
@@ -212,7 +212,7 @@ Retrieve the branch's closer, or the closer's branch
 <a name="create"></a>
 
 ## create([props], [type]) ⇒ <code>Object</code>
-Create a leaf node (branches and closes are created by the implementation)The following keys are reserved for formatting an object as a node:| Key  | Purpose                        || :--- | :----------------------------- || $0   | Type                           || $1   | Depth-first travsersal         || $2   | Reversed depth-first Traversal || $3   | BRANCH-to-CLOSE link           |
+Create a leaf node (branches and closes are created by the implementation).The following keys are reserved for formatting an object as a node:| Key  | Purpose                        || :--- | :----------------------------- || $0   | Type                           || $1   | Depth-first travsersal         || $2   | Reversed depth-first Traversal || $3   | BRANCH-to-CLOSE link           |
 
 **Kind**: global function  
 **Returns**: <code>Object</code> - node-formatted object  
