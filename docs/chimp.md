@@ -38,13 +38,33 @@
 <dl>
 <dt><a href="#create">create([props], [type])</a> ⇒ <code>Object</code></dt>
 <dd><p>Create a leaf node (branches and closes are created by the implementation)
-The following keys are reserved for formatting an object as a node:
-| Key             | Purpose
-| :--------------- | :----------
-| $0   | Type
-| $1   | Depth-first travsersal
-| $2   | Reversed depth-first Traversal
-| $3   | BRANCH-to-CLOSE link</p>
+The following keys are reserved for formatting an object as a node:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Key</th>
+<th style="text-align:left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$0</td>
+<td style="text-align:left">Type</td>
+</tr>
+<tr>
+<td style="text-align:left">$1</td>
+<td style="text-align:left">Depth-first travsersal</td>
+</tr>
+<tr>
+<td style="text-align:left">$2</td>
+<td style="text-align:left">Reversed depth-first Traversal</td>
+</tr>
+<tr>
+<td style="text-align:left">$3</td>
+<td style="text-align:left">BRANCH-to-CLOSE link</td>
+</tr>
+</tbody>
+</table>
 </dd>
 <dt><a href="#next">next(node)</a> ⇒ <code>Object</code> | <code>void</code></dt>
 <dd><p>Get the node&#39;s next node in depth-first traversal</p>
@@ -192,7 +212,7 @@ Retrieve the branch's closer, or the closer's branch
 <a name="create"></a>
 
 ## create([props], [type]) ⇒ <code>Object</code>
-Create a leaf node (branches and closes are created by the implementation)The following keys are reserved for formatting an object as a node:| Key             | Purpose| :--------------- | :----------| $0   | Type| $1   | Depth-first travsersal| $2   | Reversed depth-first Traversal| $3   | BRANCH-to-CLOSE link
+Create a leaf node (branches and closes are created by the implementation)The following keys are reserved for formatting an object as a node:| Key  | Purpose                        || :--- | :----------------------------- || $0   | Type                           || $1   | Depth-first travsersal         || $2   | Reversed depth-first Traversal || $3   | BRANCH-to-CLOSE link           |
 
 **Kind**: global function  
 **Returns**: <code>Object</code> - node-formatted object  
