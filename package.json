@@ -1,0 +1,18 @@
+{
+  "name": "triply",
+  "version": "0.0.1",
+  "description": "Triply-linked list",
+  "main": "lib/triply.js",
+  "scripts": {
+    "build":"babel --plugins @babel/plugin-transform-modules-commonjs src/index.js --out-file index.js",
+    "test": "node test/index"
+  },
+  "author": "W.S. Hager",
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.53",
+    "@babel/core": "^7.0.0-beta.53",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.53"
+  },
+  "dependencies": {}
+}
