@@ -1,10 +1,10 @@
 {
   "name": "triply",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Triply-linked list",
   "main": "lib/triply.js",
   "scripts": {
-    "build": "babel --plugins @babel/plugin-transform-modules-commonjs src/index.js --out-file index.js",
+    "build": "babel --no-babelrc --plugins @babel/plugin-transform-modules-commonjs src --out-dir lib",
     "test": "node test/index"
   },
   "author": "W.S. Hager",
