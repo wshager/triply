@@ -205,19 +205,24 @@ export function appendChild(node,ref) {
  * @return {Object}      The inserted node
  */
 export function insertBefore(node,ref) {
-	if(isFirstChild(ref)) {
-		const parent = ref.$2;
-		// replace parent's $1 with node
-		parent.$1 = node;
-		// point back to parent
-		node.$2 = parent;
+	const prev = ref.$2;
+	if(prev) {
+		// replace prev's $1 with node
+		if(isBranch(prev)) {
+			prev.$3.$1 = node;
+		} else {
+			prev.$1 = node;
+		}
+		// point back to prev
+		node.$2 = prev;
 	}
-	// update pointers
+	// update forward pointers
 	if(node.$0 === BRANCH) {
 		node.$3.$1 = ref;
 	} else {
 		node.$1 = ref;
 	}
+	// update ref's back pointer to node
 	ref.$2 = node;
 	return node;
 }
