@@ -83,18 +83,18 @@ class Triply {
      *  move insertion point back
      * @return {Triply} The updated object
      */
-	previous() {
-		const prev = chimp.previous(this._insert);
-		if(prev) this._insert = chimp.isClose(prev) ? chimp.link(prev) : prev;
+	movePrevious() {
+		const prev = this.previous();
+		if(prev) this._insert = prev;
 		return this;
 	}
 	/**
      *  move insertion point forward
      * @return {Triply} The updated object
      */
-	next() {
-		const next = chimp.next(this._insert);
-		if(next) this._insert = chimp.isClose(next) ? chimp.link(next) : next;
+	moveNext() {
+		const next = this.next();
+		if(next) this._insert = next;
 		return this;
 	}
 	/**
@@ -105,36 +105,52 @@ class Triply {
 		return chimp.traverse(this._root);
 	}
 	/**
+     * Look at next node in traversal after insertion point
+     * @return {Object|void} Node-formatted object (if any)
+     */
+	next() {
+		const next = chimp.next(this._insert);
+		return chimp.isClose(next) ? chimp.link(next) : next;
+	}
+	/**
+     * Look at previous node in traversal before insertion point
+     * @return {Object|void} Node-formatted object (if any)
+     */
+	previous() {
+		const prev = chimp.previous(this._insert);
+		return chimp.isClose(prev) ? chimp.link(prev) : prev;
+	}
+	/**
      * Look at the insertion point
-     * @return {Object} Node-formatted object
+     * @return {Object|void} Node-formatted object (if any)
      */
 	peek() {
 		return this._insert;
 	}
 	/**
      * Look at the first child of the insertion point
-     * @return {Object} Node-formatted object
+     * @return {Object|void} Node-formatted object (if any)
      */
 	firstChild() {
 		return chimp.firstChild(this._insert);
 	}
 	/**
      * Look at the last child of the insertion point
-     * @return {Object} Node-formatted object
+     * @return {Object|void} Node-formatted object (if any)
      */
 	lastChild() {
 		return chimp.lastChild(this._insert);
 	}
 	/**
      * Look at the next sibling of the insertion point
-     * @return {Object} Node-formatted object
+     * @return {Object|void} Node-formatted object (if any)
      */
 	nextSibling() {
 		return chimp.nextSibling(this._insert);
 	}
 	/**
      * Look at the previous sibling of the insertion point
-     * @return {Object} Node-formatted object
+     * @return {Object|void} Node-formatted object (if any)
      */
 	previousSibling() {
 		return chimp.previousSibling(this._insert);

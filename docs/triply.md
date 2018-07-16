@@ -14,9 +14,16 @@ Tree interface for convenient method chaining
     * [.insertBefore([props], [ref])](#Triply+insertBefore) ⇒ [<code>Triply</code>](#Triply)
     * [.open([props])](#Triply+open) ⇒ [<code>Triply</code>](#Triply)
     * [.close()](#Triply+close) ⇒ [<code>Triply</code>](#Triply)
-    * [.previous()](#Triply+previous) ⇒ [<code>Triply</code>](#Triply)
-    * [.next()](#Triply+next) ⇒ [<code>Triply</code>](#Triply)
+    * [.movePrevious()](#Triply+movePrevious) ⇒ [<code>Triply</code>](#Triply)
+    * [.moveNext()](#Triply+moveNext) ⇒ [<code>Triply</code>](#Triply)
     * [.traverse()](#Triply+traverse)
+    * [.next()](#Triply+next) ⇒ <code>Object</code> \| <code>void</code>
+    * [.previous()](#Triply+previous) ⇒ <code>Object</code> \| <code>void</code>
+    * [.peek()](#Triply+peek) ⇒ <code>Object</code> \| <code>void</code>
+    * [.firstChild()](#Triply+firstChild) ⇒ <code>Object</code> \| <code>void</code>
+    * [.lastChild()](#Triply+lastChild) ⇒ <code>Object</code> \| <code>void</code>
+    * [.nextSibling()](#Triply+nextSibling) ⇒ <code>Object</code> \| <code>void</code>
+    * [.previousSibling()](#Triply+previousSibling) ⇒ <code>Object</code> \| <code>void</code>
 
 <a name="new_Triply_new"></a>
 
@@ -105,16 +112,16 @@ move insertion point down one level (if possible)
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: [<code>Triply</code>](#Triply) - The updated object  
-<a name="Triply+previous"></a>
+<a name="Triply+movePrevious"></a>
 
-### triply.previous() ⇒ [<code>Triply</code>](#Triply)
+### triply.movePrevious() ⇒ [<code>Triply</code>](#Triply)
 move insertion point back
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: [<code>Triply</code>](#Triply) - The updated object  
-<a name="Triply+next"></a>
+<a name="Triply+moveNext"></a>
 
-### triply.next() ⇒ [<code>Triply</code>](#Triply)
+### triply.moveNext() ⇒ [<code>Triply</code>](#Triply)
 move insertion point forward
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
@@ -125,3 +132,52 @@ move insertion point forward
 Traverse
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
+<a name="Triply+next"></a>
+
+### triply.next() ⇒ <code>Object</code> \| <code>void</code>
+Look at next node in traversal after insertion point
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
+<a name="Triply+previous"></a>
+
+### triply.previous() ⇒ <code>Object</code> \| <code>void</code>
+Look at previous node in traversal before insertion point
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
+<a name="Triply+peek"></a>
+
+### triply.peek() ⇒ <code>Object</code> \| <code>void</code>
+Look at the insertion point
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
+<a name="Triply+firstChild"></a>
+
+### triply.firstChild() ⇒ <code>Object</code> \| <code>void</code>
+Look at the first child of the insertion point
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
+<a name="Triply+lastChild"></a>
+
+### triply.lastChild() ⇒ <code>Object</code> \| <code>void</code>
+Look at the last child of the insertion point
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
+<a name="Triply+nextSibling"></a>
+
+### triply.nextSibling() ⇒ <code>Object</code> \| <code>void</code>
+Look at the next sibling of the insertion point
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
+<a name="Triply+previousSibling"></a>
+
+### triply.previousSibling() ⇒ <code>Object</code> \| <code>void</code>
+Look at the previous sibling of the insertion point
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
