@@ -108,7 +108,7 @@ export function previousSibling(node) {
  * @yields {Object}          Node-formatted object
  */
 export function* traverse(node) {
-	if(isLeaf(node)) return yield node;
+	//if(isLeaf(node)) return yield node;
 	const start = node;
 	while(node) {
 		yield node;

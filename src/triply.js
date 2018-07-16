@@ -104,6 +104,41 @@ class Triply {
 	traverse() {
 		return chimp.traverse(this._root);
 	}
+	/**
+     * Look at the insertion point
+     * @return {Object} Node-formatted object
+     */
+	peek() {
+		return this._insert;
+	}
+	/**
+     * Look at the first child of the insertion point
+     * @return {Object} Node-formatted object
+     */
+	firstChild() {
+		return chimp.firstChild(this._insert);
+	}
+	/**
+     * Look at the last child of the insertion point
+     * @return {Object} Node-formatted object
+     */
+	lastChild() {
+		return chimp.lastChild(this._insert);
+	}
+	/**
+     * Look at the next sibling of the insertion point
+     * @return {Object} Node-formatted object
+     */
+	nextSibling() {
+		return chimp.nextSibling(this._insert);
+	}
+	/**
+     * Look at the previous sibling of the insertion point
+     * @return {Object} Node-formatted object
+     */
+	previousSibling() {
+		return chimp.previousSibling(this._insert);
+	}
 }
 
 const Monkey = Object.assign(Triply,chimp);
