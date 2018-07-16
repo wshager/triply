@@ -1,6 +1,6 @@
 {
   "name": "triply",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Triply-linked list",
   "main": "lib/triply.js",
   "scripts": {
