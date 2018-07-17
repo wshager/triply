@@ -338,3 +338,31 @@ export function remove(node) {
 	}
 	return isClose(prev) ? link(prev) : prev;
 }
+
+export function openBefore(props = {}, ref) {
+	// wrap this level, from ref to it's last sibling (it may not have a parent yet)
+	const close = create({},CLOSE);
+	const ins = create(props,BRANCH);
+	close.$3 = ins;
+	ins.$3 = close;
+	let lastSib, nextSib = ref;
+	while(nextSib) {
+		lastSib = nextSib;
+		nextSib = nextSibling(nextSib);
+	}
+	if(isBranch(lastSib)) {
+		// append a closer to the end of the ref
+		lastSib.$3.$1 = close;
+		close.$2 = lastSib.$3;
+	} else {
+		// append closer to the leaf
+		lastSib.$1 = close;
+		close.$2 = lastSib;
+	}
+	const prev = ref.$2;
+	ins.$2 = prev;
+	ref.$2 = ins;
+	prev.$1 = ins;
+	ins.$1 = ref;
+	return ins;
+}

@@ -195,6 +195,10 @@ class Triply {
 	previousSibling() {
 		return chimp.previousSibling(this._insert);
 	}
+	openBefore(props = {}) {
+		this._insert = chimp.openBefore(props,this._insert);
+		return this;
+	}
 }
 
 const Monkey = Object.assign(Triply,chimp);
