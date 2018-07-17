@@ -16,6 +16,10 @@ Tree interface for convenient method chaining
     * [.close()](#Triply+close) ⇒ [<code>Triply</code>](#Triply)
     * [.movePrevious()](#Triply+movePrevious) ⇒ [<code>Triply</code>](#Triply)
     * [.moveNext()](#Triply+moveNext) ⇒ [<code>Triply</code>](#Triply)
+    * [.movePreviousSibling()](#Triply+movePreviousSibling) ⇒ [<code>Triply</code>](#Triply)
+    * [.moveNextSibling()](#Triply+moveNextSibling) ⇒ [<code>Triply</code>](#Triply)
+    * [.mark(name)](#Triply+mark) ⇒ [<code>Triply</code>](#Triply)
+    * [.unmark(name)](#Triply+unmark) ⇒ [<code>Triply</code>](#Triply)
     * [.traverse()](#Triply+traverse)
     * [.next()](#Triply+next) ⇒ <code>Object</code> \| <code>void</code>
     * [.previous()](#Triply+previous) ⇒ <code>Object</code> \| <code>void</code>
@@ -126,6 +130,44 @@ move insertion point forward
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: [<code>Triply</code>](#Triply) - The updated object  
+<a name="Triply+movePreviousSibling"></a>
+
+### triply.movePreviousSibling() ⇒ [<code>Triply</code>](#Triply)
+move insertion point to previous sibling
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: [<code>Triply</code>](#Triply) - The updated object  
+<a name="Triply+moveNextSibling"></a>
+
+### triply.moveNextSibling() ⇒ [<code>Triply</code>](#Triply)
+move insertion point to next sibling
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: [<code>Triply</code>](#Triply) - The updated object  
+<a name="Triply+mark"></a>
+
+### triply.mark(name) ⇒ [<code>Triply</code>](#Triply)
+store the insertion point into a bookmark
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: [<code>Triply</code>](#Triply) - The updated object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>String</code> \| <code>Number</code> | The name of the bookmark |
+
+<a name="Triply+unmark"></a>
+
+### triply.unmark(name) ⇒ [<code>Triply</code>](#Triply)
+Restore the insertion point to the set bookmark
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: [<code>Triply</code>](#Triply) - The updated object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>String</code> \| <code>Number</code> | The name of the bookmark |
+
 <a name="Triply+traverse"></a>
 
 ### triply.traverse()
@@ -135,14 +177,14 @@ Traverse
 <a name="Triply+next"></a>
 
 ### triply.next() ⇒ <code>Object</code> \| <code>void</code>
-Look at next node in traversal after insertion point
+Look at next node in traversal after insertion point, skipping closes
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
 <a name="Triply+previous"></a>
 
 ### triply.previous() ⇒ <code>Object</code> \| <code>void</code>
-Look at previous node in traversal before insertion point
+Look at previous node in traversal before insertion point, skipping closes
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
