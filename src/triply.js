@@ -11,6 +11,7 @@ class Triply {
      */
 	constructor(props = {}){
 		this._root = this._insert = chimp.create(props);
+		this._marks = {};
 	}
 	/**
      * append a sibling after the provided reference or the insertion point
@@ -98,6 +99,45 @@ class Triply {
 		return this;
 	}
 	/**
+     *  move insertion point to previous sibling
+     * @return {Triply} The updated object
+     */
+	movePreviousSibling() {
+		const prev = this.previousSibling();
+		if(prev) this._insert = prev;
+		return this;
+	}
+	/**
+     *  move insertion point to next sibling
+     * @return {Triply} The updated object
+     */
+	moveNextSibling() {
+		const next = this.nextSibling();
+		if(next) this._insert = next;
+		return this;
+	}
+	/**
+	 * store the insertion point into a bookmark
+	 * @param  {String|Number} name The name of the bookmark
+	 * @return {Triply}      The updated object
+	 */
+	mark(name) {
+		this._marks[name] = this._insert;
+		return this;
+	}
+	/**
+	 * Restore the insertion point to the set bookmark
+	 * @param  {String|Number} name The name of the bookmark
+	 * @return {Triply}      The updated object
+	 */
+	unmark(name) {
+		if(name in this._marks) {
+			this._insert = this._marks[name];
+			delete this._marks[name];
+		}
+		return this;
+	}
+	/**
      * Traverse
      * @yields {Object} [Node-formatted object
      */
@@ -105,20 +145,20 @@ class Triply {
 		return chimp.traverse(this._root);
 	}
 	/**
-     * Look at next node in traversal after insertion point
+     * Look at next node in traversal after insertion point, skipping closes
      * @return {Object|void} Node-formatted object (if any)
      */
 	next() {
 		const next = chimp.next(this._insert);
-		return chimp.isClose(next) ? chimp.link(next) : next;
+		return chimp.isClose(next) ? chimp.next(next) : next;
 	}
 	/**
-     * Look at previous node in traversal before insertion point
+     * Look at previous node in traversal before insertion point, skipping closes
      * @return {Object|void} Node-formatted object (if any)
      */
 	previous() {
 		const prev = chimp.previous(this._insert);
-		return chimp.isClose(prev) ? chimp.link(prev) : prev;
+		return chimp.isClose(prev) ? chimp.previous(prev) : prev;
 	}
 	/**
      * Look at the insertion point
