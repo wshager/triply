@@ -10,7 +10,8 @@ Tree interface for convenient method chaining
     * [.insertAfter([props], [ref])](#Triply+insertAfter) ⇒ [<code>Triply</code>](#Triply)
     * [.appendChild([props], [ref])](#Triply+appendChild) ⇒ [<code>Triply</code>](#Triply)
     * [.push([props])](#Triply+push) ⇒ [<code>Triply</code>](#Triply)
-    * [.pop()](#Triply+pop) ⇒ [<code>Triply</code>](#Triply)
+    * [.remove()](#Triply+remove) ⇒ <code>Object</code>
+    * [.pop()](#Triply+pop) ⇒ <code>Object</code>
     * [.insertBefore([props], [ref])](#Triply+insertBefore) ⇒ [<code>Triply</code>](#Triply)
     * [.open([props])](#Triply+open) ⇒ [<code>Triply</code>](#Triply)
     * [.close()](#Triply+close) ⇒ [<code>Triply</code>](#Triply)
@@ -18,6 +19,8 @@ Tree interface for convenient method chaining
     * [.moveNext()](#Triply+moveNext) ⇒ [<code>Triply</code>](#Triply)
     * [.movePreviousSibling()](#Triply+movePreviousSibling) ⇒ [<code>Triply</code>](#Triply)
     * [.moveNextSibling()](#Triply+moveNextSibling) ⇒ [<code>Triply</code>](#Triply)
+    * [.moveFirstChild()](#Triply+moveFirstChild) ⇒ [<code>Triply</code>](#Triply)
+    * [.moveLastChild()](#Triply+moveLastChild) ⇒ [<code>Triply</code>](#Triply)
     * [.mark(name)](#Triply+mark) ⇒ [<code>Triply</code>](#Triply)
     * [.unmark(name)](#Triply+unmark) ⇒ [<code>Triply</code>](#Triply)
     * [.traverse()](#Triply+traverse)
@@ -28,6 +31,8 @@ Tree interface for convenient method chaining
     * [.lastChild()](#Triply+lastChild) ⇒ <code>Object</code> \| <code>void</code>
     * [.nextSibling()](#Triply+nextSibling) ⇒ <code>Object</code> \| <code>void</code>
     * [.previousSibling()](#Triply+previousSibling) ⇒ <code>Object</code> \| <code>void</code>
+    * [.openBefore(props, [lastSib])](#Triply+openBefore) ⇒ [<code>Triply</code>](#Triply)
+    * [.moveRoot()](#Triply+moveRoot) ⇒ [<code>Triply</code>](#Triply)
 
 <a name="new_Triply_new"></a>
 
@@ -68,7 +73,7 @@ append a child node to the provided reference or the insertion point
 <a name="Triply+push"></a>
 
 ### triply.push([props]) ⇒ [<code>Triply</code>](#Triply)
-add a (sibling) node
+Alias for insertAfter
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: [<code>Triply</code>](#Triply) - The updated object  
@@ -77,13 +82,20 @@ add a (sibling) node
 | --- | --- | --- | --- |
 | [props] | <code>Object</code> | <code>{}</code> | Object / node-formatted |
 
-<a name="Triply+pop"></a>
+<a name="Triply+remove"></a>
 
-### triply.pop() ⇒ [<code>Triply</code>](#Triply)
-remove the last node
+### triply.remove() ⇒ <code>Object</code>
+Remove the node at the insertion pointreturns the removed node so it can be reused
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
-**Returns**: [<code>Triply</code>](#Triply) - The updated object  
+**Returns**: <code>Object</code> - The removed node-formatted object  
+<a name="Triply+pop"></a>
+
+### triply.pop() ⇒ <code>Object</code>
+Alias for remove
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: <code>Object</code> - The removed node-formatted object  
 <a name="Triply+insertBefore"></a>
 
 ### triply.insertBefore([props], [ref]) ⇒ [<code>Triply</code>](#Triply)
@@ -141,6 +153,20 @@ move insertion point to previous sibling
 
 ### triply.moveNextSibling() ⇒ [<code>Triply</code>](#Triply)
 move insertion point to next sibling
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: [<code>Triply</code>](#Triply) - The updated object  
+<a name="Triply+moveFirstChild"></a>
+
+### triply.moveFirstChild() ⇒ [<code>Triply</code>](#Triply)
+move insertion point to first child (if have)
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: [<code>Triply</code>](#Triply) - The updated object  
+<a name="Triply+moveLastChild"></a>
+
+### triply.moveLastChild() ⇒ [<code>Triply</code>](#Triply)
+move insertion point to last child (if have)
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: [<code>Triply</code>](#Triply) - The updated object  
@@ -223,3 +249,23 @@ Look at the previous sibling of the insertion point
 
 **Kind**: instance method of [<code>Triply</code>](#Triply)  
 **Returns**: <code>Object</code> \| <code>void</code> - Node-formatted object (if any)  
+<a name="Triply+openBefore"></a>
+
+### triply.openBefore(props, [lastSib]) ⇒ [<code>Triply</code>](#Triply)
+Create a new branch before the insertion pointand add all its siblings up to lastSibling
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: [<code>Triply</code>](#Triply) - The updated object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| props | <code>Object</code> | Initial object |
+| [lastSib] | <code>Object</code> | The last sibling to add to the branch |
+
+<a name="Triply+moveRoot"></a>
+
+### triply.moveRoot() ⇒ [<code>Triply</code>](#Triply)
+Move insertion point to root
+
+**Kind**: instance method of [<code>Triply</code>](#Triply)  
+**Returns**: [<code>Triply</code>](#Triply) - The updated object  

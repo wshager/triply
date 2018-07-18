@@ -102,6 +102,9 @@
 <dt><a href="#remove">remove(node)</a> ⇒ <code>Object</code></dt>
 <dd><p>remove node from its parent</p>
 </dd>
+<dt><a href="#openBefore">openBefore(props, ref, [lastSib])</a> ⇒ <code>Object</code></dt>
+<dd><p>Create a new branch before a node and add all its siblings up to lastSibling</p>
+</dd>
 </dl>
 
 <a name="LEAF"></a>
@@ -357,9 +360,23 @@ remove child from node
 remove node from its parent
 
 **Kind**: global function  
-**Returns**: <code>Object</code> - The previous node in traversal (not closers)  
+**Returns**: <code>Object</code> - The removed node-formatted object (for reuse)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | node | <code>Object</code> | Node-formatted object |
+
+<a name="openBefore"></a>
+
+## openBefore(props, ref, [lastSib]) ⇒ <code>Object</code>
+Create a new branch before a node and add all its siblings up to lastSibling
+
+**Kind**: global function  
+**Returns**: <code>Object</code> - The new branch  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| props | <code>Object</code> | Initial object |
+| ref | <code>Object</code> | Reference node |
+| [lastSib] | <code>Object</code> | The last sibling to add to the branch |
 
