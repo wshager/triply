@@ -36,7 +36,7 @@ class Triply {
 		return this;
 	}
 	/**
-     * add a (sibling) node
+     * Alias for insertAfter
      * @param  {Object} [props={}] Object / node-formatted
      * @return {Triply} The updated object
      */
@@ -44,12 +44,23 @@ class Triply {
 		return this.insertAfter(props);
 	}
 	/**
-     * remove the last node
-     * @return {Triply}            The updated object
+     * Remove the node at the insertion point
+     * returns the removed node so it can be reused
+     * @return {Object} The removed node-formatted object
      */
+	remove(ref){
+		if(!ref) ref = this._insert;
+		const rootChange = ref === this._root;
+		if(rootChange) this._root = chimp.next(ref);
+		chimp.remove(ref);
+		return ref;
+	}
+	/**
+	 * Alias for remove
+	 * @return {Object} The removed node-formatted object
+	 */
 	pop(){
-		this._insert = chimp.remove(this._insert);
-		return this;
+		return this.remove();
 	}
 	/**
      * insert (new) node before insertion point
@@ -114,6 +125,24 @@ class Triply {
 	moveNextSibling() {
 		const next = this.nextSibling();
 		if(next) this._insert = next;
+		return this;
+	}
+	/**
+     *  move insertion point to first child (if have)
+     * @return {Triply} The updated object
+     */
+	moveFirstChild() {
+		const first = chimp.firstChild(this._insert);
+		if(first) this._insert = first;
+		return this;
+	}
+	/**
+	 *  move insertion point to last child (if have)
+	 * @return {Triply} The updated object
+	 */
+	moveLastChild() {
+		const last = chimp.lastChild(this._insert);
+		if(last) this._insert = last;
 		return this;
 	}
 	/**
@@ -195,8 +224,23 @@ class Triply {
 	previousSibling() {
 		return chimp.previousSibling(this._insert);
 	}
-	openBefore(props = {}) {
-		this._insert = chimp.openBefore(props,this._insert);
+	/**
+	 * Create a new branch before the insertion point
+	 * and add all its siblings up to lastSibling
+	 * @param  {Object} props Initial object
+	 * @param {Object=} lastSib The last sibling to add to the branch
+	 * @return {Triply}      The updated object
+	 */
+	openBefore(props = {},lastSib) {
+		this._insert = chimp.openBefore(props,this._insert,lastSib);
+		return this;
+	}
+	/**
+	 * Move insertion point to root
+	 * @return {Triply} The updated object
+	 */
+	moveRoot() {
+		this._insert = this._root;
 		return this;
 	}
 }
