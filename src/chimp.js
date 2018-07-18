@@ -274,7 +274,7 @@ export const isLastChild = node => !!node && isClose(isLeaf(node) ? node.$1 : no
  * @param  {Object} node Node-formatted object
  * @return {Boolean}      The inserted node
  */
-export const isFirstChild = node => !!node && node.$2.$0 === BRANCH;
+export const isFirstChild = node => !!node && isBranch(node.$2);
 
 /**
  * Test if node is empty branch
@@ -321,36 +321,52 @@ export function removeChild(node,child) {
 /**
  * remove node from its parent
  * @param  {Object} node Node-formatted object
- * @return {Object}      The previous node in traversal (not closers)
+ * @return {Object}      The removed node-formatted object (for reuse)
  */
 export function remove(node) {
 	// TODO guards!
-	const prev = previous(node);
 	if(isFirstChild(node)) {
 		removeChild(node.$2,node);
 	} else if(isLastChild(node)) {
 		removeChild(node.$1.$3,node);
 	} else {
+		const prv = previous(node);
+		const nxt = next(node);
 		// splice out
-		prev.$1 = node;
-		node.$2 = prev;
-		return prev;
+		if(prv) prv.$1 = nxt;
+		if(nxt) nxt.$2 = prv;
 	}
-	return isClose(prev) ? link(prev) : prev;
+	return node;
 }
 
-export function openBefore(props = {}, ref) {
+/**
+ * Create a new branch before a node and add all its siblings up to lastSibling
+ * @param  {Object} props Initial object
+ * @param {Object} ref   Reference node
+ * @param {Object=} lastSib The last sibling to add to the branch
+ * @return {Object}      The new branch
+ */
+export function openBefore(props = {}, ref, lastSib) {
 	// wrap this level, from ref to it's last sibling (it may not have a parent yet)
-	const close = create({},CLOSE);
-	const ins = create(props,BRANCH);
+	const close = create({}, CLOSE);
+	const ins = create(props);
+	ins.$0 = 2;
 	close.$3 = ins;
 	ins.$3 = close;
-	let lastSib, nextSib = ref;
-	while(nextSib) {
-		lastSib = nextSib;
-		nextSib = nextSibling(nextSib);
+	if(!lastSib) {
+		let nextSib = ref;
+
+		while (nextSib) {
+			lastSib = nextSib;
+			nextSib = nextSibling(nextSib);
+		}
 	}
-	if(isBranch(lastSib)) {
+	const nxt = next(lastSib);
+	if(nxt) {
+		close.$1 = nxt;
+		nxt.$2 = close;
+	}
+	if (isBranch(lastSib)) {
 		// append a closer to the end of the ref
 		lastSib.$3.$1 = close;
 		close.$2 = lastSib.$3;
@@ -359,6 +375,7 @@ export function openBefore(props = {}, ref) {
 		lastSib.$1 = close;
 		close.$2 = lastSib;
 	}
+
 	const prev = ref.$2;
 	ins.$2 = prev;
 	ref.$2 = ins;
