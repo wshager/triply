@@ -1,5 +1,7 @@
 import * as chimp from "./chimp";
 
+const view = chimp.view;
+
 /**
  * Tree interface for convenient method chaining
  */
@@ -50,8 +52,11 @@ class Triply {
      */
 	remove(ref){
 		if(!ref) ref = this._insert;
+		this._insert = chimp.previous(ref);
 		const rootChange = ref === this._root;
-		if(rootChange) this._root = chimp.next(ref);
+		if(rootChange) {
+			this._root = chimp.next(ref);
+		}
 		chimp.remove(ref);
 		return ref;
 	}
@@ -170,8 +175,8 @@ class Triply {
      * Traverse
      * @yields {Object} [Node-formatted object
      */
-	traverse() {
-		return chimp.traverse(this._root);
+	traverse(stripped) {
+		return chimp.traverse(this._root,stripped);
 	}
 	/**
      * Look at next node in traversal after insertion point, skipping closes
@@ -193,36 +198,36 @@ class Triply {
      * Look at the insertion point
      * @return {Object|void} Node-formatted object (if any)
      */
-	peek() {
-		return this._insert;
+	peek(stripped) {
+		return view(this._insert,stripped);
 	}
 	/**
      * Look at the first child of the insertion point
      * @return {Object|void} Node-formatted object (if any)
      */
-	firstChild() {
-		return chimp.firstChild(this._insert);
+	firstChild(stripped) {
+		return view(chimp.firstChild(this._insert),stripped);
 	}
 	/**
      * Look at the last child of the insertion point
      * @return {Object|void} Node-formatted object (if any)
      */
-	lastChild() {
-		return chimp.lastChild(this._insert);
+	lastChild(stripped) {
+		return view(chimp.lastChild(this._insert),stripped);
 	}
 	/**
      * Look at the next sibling of the insertion point
      * @return {Object|void} Node-formatted object (if any)
      */
-	nextSibling() {
-		return chimp.nextSibling(this._insert);
+	nextSibling(stripped) {
+		return view(chimp.nextSibling(this._insert),stripped);
 	}
 	/**
      * Look at the previous sibling of the insertion point
      * @return {Object|void} Node-formatted object (if any)
      */
-	previousSibling() {
-		return chimp.previousSibling(this._insert);
+	previousSibling(stripped) {
+		return view(chimp.previousSibling(this._insert),stripped);
 	}
 	/**
 	 * Create a new branch before the insertion point
