@@ -7,7 +7,7 @@
     "build": "babel --no-babelrc --plugins @babel/plugin-transform-modules-commonjs src --out-dir lib",
     "test": "node test/index"
   },
-  "author": "W.S. Hager",
+  "author": "Wouter Hager",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.53",
