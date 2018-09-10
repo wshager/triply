@@ -37,6 +37,10 @@ export const isBranch = node => !!node && node.$0 === BRANCH;
  */
 export const isClose = node => !!node && node.$0 === CLOSE;
 
+const dollarRE = /^\$/;
+const _strip = x => x && Object.entries(x).reduce((a,[k,v]) => dollarRE.test(k) ? a : (a[k] = v,a),{});
+export const view = (x,stripped) => stripped ? _strip(x) : x;
+
 /**
  * Create a leaf node (branches and closes are created by the implementation).
  *
@@ -107,13 +111,18 @@ export function previousSibling(node) {
  * @param  {Object}    node  Node-formatted object
  * @yields {Object}          Node-formatted object
  */
-export function* traverse(node) {
-	//if(isLeaf(node)) return yield node;
+export function* traverse(node,stripped) {
+	// siblings without parent may be traversed,
+	// but when the start is a leaf
+	// prevent yielding a close
 	const start = node;
 	while(node) {
-		yield node;
+		yield view(node,stripped);
 		if(node === start.$3) return;
+		const old = node;
 		node = node.$1;
+		// FIXME can this be more efficient?
+		if(node && isLeaf(start) && !node.$1 && node.$0 == 3 && node.$2 == old) return;
 	}
 }
 
@@ -330,11 +339,21 @@ export function remove(node) {
 	} else if(isLastChild(node)) {
 		removeChild(node.$1.$3,node);
 	} else {
+		// if it's a branch, remove it and
+		// make all children siblings of previous
 		const prv = previous(node);
 		const nxt = next(node);
 		// splice out
-		if(prv) prv.$1 = nxt;
-		if(nxt) nxt.$2 = prv;
+		if(isBranch(node)) {
+			const nx = nextSibling(node);
+			const last = lastChild(node);
+			if(prv) prv.$1 = nxt;
+			if(nxt) nxt.$2 = prv;
+			if(last) last.$1 = nx;
+		} else {
+			if(prv) prv.$1 = nxt;
+			if(nxt) nxt.$2 = prv;
+		}
 	}
 	return node;
 }
