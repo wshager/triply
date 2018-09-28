@@ -37,8 +37,8 @@ export const isBranch = node => !!node && node.$0 === BRANCH;
  */
 export const isClose = node => !!node && node.$0 === CLOSE;
 
-const dollarRE = /^\$/;
-const _strip = x => x && Object.entries(x).reduce((a,[k,v]) => dollarRE.test(k) ? a : (a[k] = v,a),{});
+const reservedRE = /^\$[0-3]$/;
+const _strip = x => x && Object.entries(x).reduce((a,[k,v]) => reservedRE.test(k) ? a : (a[k] = v,a),{});
 export const view = (x,stripped) => stripped ? _strip(x) : x;
 
 /**
@@ -59,12 +59,12 @@ export const view = (x,stripped) => stripped ? _strip(x) : x;
  */
 export function create(props = {},type = LEAF) {
 	// NOTE Actually, a LEAF never has $3...
-	return Object.assign({
+	return Object.assign(props,{
 		$0:type,
 		$1:void 0,
 		$2:void 0,
 		$3:void 0
-	},props);
+	});
 }
 
 /**
@@ -217,11 +217,11 @@ export function insertBefore(node,ref) {
 	const prev = ref.$2;
 	if(prev) {
 		// replace prev's $1 with node
-		if(isBranch(prev)) {
-			prev.$3.$1 = node;
-		} else {
-			prev.$1 = node;
-		}
+		//if(isBranch(prev)) {
+		//	prev.$3.$1 = node;
+		//} else {
+		prev.$1 = node;
+		//}
 		// point back to prev
 		node.$2 = prev;
 	}
